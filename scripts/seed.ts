@@ -6,9 +6,12 @@
  *
  * Usage:  cp .env.example .env.local  →  npm run seed
  */
-import "dotenv/config";
+import { config as loadEnv } from "dotenv";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { makeZip, type ZipEntry } from "./zip";
+
+loadEnv({ path: ".env.local" });
+loadEnv({ path: ".env" });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";

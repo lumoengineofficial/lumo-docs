@@ -277,14 +277,14 @@ create policy "store objects can be updated"
   on storage.objects for update
   using (
     bucket_id in ('assets', 'covers')
-    and (owner_id = auth.uid() or public.is_admin())
+    and (owner_id::text = auth.uid()::text or public.is_admin())
   );
 
 create policy "store objects can be deleted"
   on storage.objects for delete
   using (
     bucket_id in ('assets', 'covers')
-    and (owner_id = auth.uid() or public.is_admin())
+    and (owner_id::text = auth.uid()::text or public.is_admin())
   );
 
 -- ---------------------------------------------------------------------------

@@ -76,7 +76,7 @@ export function makeZip(entries: ZipEntry[]): Buffer {
     central.writeUInt16LE(0, 32); // comment
     central.writeUInt16LE(0, 34); // disk
     central.writeUInt16LE(0, 36); // internal attrs
-    central.writeUInt32LE(0o100644 << 16, 38); // external attrs
+    central.writeUInt32LE((0o100644 << 16) >>> 0, 38); // external attrs
     central.writeUInt32LE(offset, 42);
     nameBuf.copy(central, 46);
 
