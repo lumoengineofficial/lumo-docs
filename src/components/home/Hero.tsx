@@ -13,7 +13,7 @@ export function Hero() {
     <section className="relative overflow-hidden border-b border-line">
       <div className="absolute inset-0 surface-grid opacity-60" />
       <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-accent/25 blur-[140px]" />
-      <div className="absolute -right-32 top-24 h-[420px] w-[420px] rounded-full bg-[#8b5ef5]/20 blur-[130px]" />
+          <div className="absolute -right-32 top-24 h-[420px] w-[420px] rounded-full bg-accent-light/20 blur-[130px]" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
       <div className="relative mx-auto grid max-w-7xl gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:px-8 lg:py-28">
@@ -68,7 +68,7 @@ export function Hero() {
               MIT licensed core
             </div>
             <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#8b5ef5]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-olive" />
               glTF · FBX · PNG · WAV
             </div>
           </dl>

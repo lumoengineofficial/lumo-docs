@@ -17,7 +17,7 @@ body {
 }
 
 ::selection {
-  background: rgba(79, 94, 245, 0.4);
+  background: rgba(207, 109, 252, 0.4);
   color: #fff;
 }
 
@@ -76,7 +76,7 @@ body {
   }
 
   .accent-gradient {
-    background: linear-gradient(135deg, #4f5ef5 0%, #7b5ef5 50%, #4f5ef5 100%);
+    background: linear-gradient(135deg, #fdfbd4 0%, #c1bfff 55%, #cf6dfc 100%);
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -129,7 +129,7 @@ body {
 }
 
 .markdown li::marker {
-  color: #4f5ef5;
+  color: #cf6dfc;
 }
 
 .markdown code {

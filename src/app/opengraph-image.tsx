@@ -29,7 +29,7 @@ export default function OpengraphImage() {
               width: 64,
               height: 64,
               borderRadius: 16,
-              background: "linear-gradient(135deg,#4f5ef5,#8b5ef5)",
+              background: "linear-gradient(135deg,#cf6dfc,#c1bfff)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -60,7 +60,7 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              background: "#4f5ef5",
+              background: "#cf6dfc",
               color: "#fff",
               padding: "14px 28px",
               borderRadius: 10,

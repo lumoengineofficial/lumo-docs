@@ -9,11 +9,13 @@ const config: Config = {
     extend: {
       colors: {
         accent: {
-          DEFAULT: "#4f5ef5",
-          hover: "#3d4be0",
-          soft: "#4f5ef51a",
-          light: "#8b95ff",
+          DEFAULT: "#cf6dfc",
+          hover: "#b955e8",
+          soft: "#cf6dfc1a",
+          light: "#c1bfff",
         },
+        olive: "#bdb96a",
+        cream: "#fdfbd4",
         ink: "#0a0e17",
         panel: "#111726",
         panel2: "#161d30",
@@ -26,7 +28,7 @@ const config: Config = {
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       boxShadow: {
-        glow: "0 0 40px -10px rgba(79, 94, 245, 0.55)",
+        glow: "0 0 40px -10px rgba(207, 109, 252, 0.55)",
         card: "0 18px 40px -24px rgba(0, 0, 0, 0.9)",
       },
       backgroundImage: {

@@ -3,8 +3,8 @@ export function LumoMark({ className = "h-7 w-7" }: { className?: string }) {
     <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
       <defs>
         <linearGradient id="lumoGrad" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#4f5ef5" />
-          <stop offset="1" stopColor="#8b5ef5" />
+          <stop stopColor="#cf6dfc" />
+          <stop offset="1" stopColor="#c1bfff" />
         </linearGradient>
       </defs>
       <path
@@ -20,7 +20,7 @@ export function LumoMark({ className = "h-7 w-7" }: { className?: string }) {
         strokeWidth="3.2"
         strokeLinecap="round"
       />
-      <circle cx="27.5" cy="14" r="2.4" fill="#8b95ff" />
+      <circle cx="27.5" cy="14" r="2.4" fill="#fdfbd4" />
     </svg>
   );
 }

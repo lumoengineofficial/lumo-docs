@@ -5,7 +5,7 @@ export const SITE = {
   description:
     "Lumo Asset Store is the official marketplace for the open-source Lumo 3D game engine. Download 3D models, textures, sprites, audio, plugins and project templates — or publish your own.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://lumoassets.vercel.app",
-  accent: "#4f5ef5",
+  accent: "#cf6dfc",
   engineZip:
     "https://github.com/lumoengineofficial/lumo/releases/download/v1.0.0/LumoEngine-v1.0.0-win-x64.zip",
   releases: "https://github.com/lumoengineofficial/lumo/releases",
