@@ -9,6 +9,7 @@ import { AssetGrid } from "@/components/assets/AssetGrid";
 import { DownloadButton } from "@/components/asset/DownloadButton";
 import { Gallery } from "@/components/asset/Gallery";
 import { Badge } from "@/components/ui/Badge";
+import { Avatar } from "@/components/ui/Avatar";
 
 export const dynamic = "force-dynamic";
 
@@ -112,9 +113,11 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                   href={`/author/${asset.author.handle}`}
                   className="flex items-center gap-2 transition hover:text-accent-light"
                 >
-                  <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-bold text-white">
-                    {(asset.author.username || "?").slice(0, 1).toUpperCase()}
-                  </span>
+                  <Avatar
+                    src={asset.author.avatar_url}
+                    name={asset.author.username}
+                    size="sm"
+                  />
                   {asset.author.username}
                 </Link>
               ) : null}
@@ -192,9 +195,11 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                 href={`/author/${asset.author.handle}`}
                 className="mt-3 flex items-center gap-3 transition hover:text-accent-light"
               >
-                <span className="accent-gradient flex h-10 w-10 items-center justify-center rounded-lg text-sm font-bold text-white">
-                  {(asset.author.username || "?").slice(0, 1).toUpperCase()}
-                </span>
+                <Avatar
+                  src={asset.author.avatar_url}
+                  name={asset.author.username}
+                  size="md"
+                />
                 <span>
                   <span className="block text-sm font-semibold text-white">
                     {asset.author.username}
