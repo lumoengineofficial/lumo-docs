@@ -60,15 +60,15 @@ export function HowItWorks() {
             key={item.step}
             className="group relative overflow-hidden rounded-2xl border border-line bg-panel p-6 transition hover:border-accent/50"
           >
-            <div className="absolute right-4 top-4 font-mono text-5xl font-bold text-white/[0.04] transition group-hover:text-accent/10">
+            <div className="absolute right-4 top-4 font-mono text-5xl font-bold text-title/[0.04] transition group-hover:text-accent/10">
               {item.step}
             </div>
-            <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent-soft text-accent-light transition group-hover:bg-accent group-hover:text-white">
+            <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent-soft text-accent-light transition group-hover:bg-accent group-hover:text-title">
               <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
                 {item.icon}
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+            <h3 className="text-lg font-semibold text-title">{item.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
           </div>
         ))}

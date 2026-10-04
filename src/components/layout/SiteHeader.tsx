@@ -8,6 +8,7 @@ import { getBrowserClient, supabaseConfigured } from "@/lib/supabase";
 import type { Profile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LumoMark } from "@/components/ui/LumoMark";
 
 interface SessionUser {
@@ -105,7 +106,7 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
             className="h-7 w-7 rounded-md object-cover"
           />
         ) : (
-          <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-bold text-white">
+          <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-bold text-title">
             {initials(profile.username || profile.handle || "U")}
           </span>
         )}
@@ -119,14 +120,14 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-line bg-panel shadow-card">
             <div className="border-b border-line px-4 py-3">
-              <p className="truncate text-sm font-medium text-white">{profile.username}</p>
+              <p className="truncate text-sm font-medium text-title">{profile.username}</p>
               <p className="truncate text-xs text-muted">@{profile.handle}</p>
             </div>
             <div className="p-1.5">
               <Link
                 href="/dashboard"
                 onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2 text-sm text-mist transition hover:bg-panel2 hover:text-white"
+                className="block rounded-md px-3 py-2 text-sm text-mist transition hover:bg-panel2 hover:text-title"
               >
                 Publisher dashboard
               </Link>
@@ -134,7 +135,7 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
                 <Link
                   href="/admin"
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm text-mist transition hover:bg-panel2 hover:text-white"
+                  className="block rounded-md px-3 py-2 text-sm text-mist transition hover:bg-panel2 hover:text-title"
                 >
                   Admin panel
                 </Link>
@@ -142,7 +143,7 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
               <Link
                 href={`/author/${profile.handle}`}
                 onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2 text-sm text-mist transition hover:bg-panel2 hover:text-white"
+                className="block rounded-md px-3 py-2 text-sm text-mist transition hover:bg-panel2 hover:text-title"
               >
                 My public profile
               </Link>
@@ -173,7 +174,7 @@ export function SiteHeader() {
         <Link href="/" className="group flex items-center gap-2.5">
           <LumoMark className="h-8 w-8 transition group-hover:scale-105" />
           <span className="flex flex-col leading-tight">
-            <span className="text-[15px] font-bold tracking-tight text-white">Lumo</span>
+            <span className="text-[15px] font-bold tracking-tight text-title">Lumo</span>
             <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-accent-light">
               Asset Store
             </span>
@@ -190,7 +191,7 @@ export function SiteHeader() {
                 href={link.href}
                 className={cn(
                   "rounded-lg px-3 py-2 text-sm font-medium transition",
-                  active ? "bg-panel2 text-white" : "text-muted hover:text-white",
+                  active ? "bg-panel2 text-title" : "text-muted hover:text-title",
                 )}
               >
                 {link.label}
@@ -203,6 +204,7 @@ export function SiteHeader() {
           <ButtonLink href="/dashboard" variant="ghost" size="sm">
             Publish
           </ButtonLink>
+          <ThemeToggle />
           <AuthArea />
         </div>
 
@@ -243,20 +245,21 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-mist transition hover:bg-panel2 hover:text-white"
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-mist transition hover:bg-panel2 hover:text-title"
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href="/dashboard"
-              className="rounded-lg px-3 py-2.5 text-sm font-medium text-mist transition hover:bg-panel2 hover:text-white"
+              className="rounded-lg px-3 py-2.5 text-sm font-medium text-mist transition hover:bg-panel2 hover:text-title"
             >
               Publisher dashboard
             </Link>
           </nav>
-          <div className="mt-3 border-t border-line pt-3">
+          <div className="mt-3 flex items-center justify-between gap-2 border-t border-line pt-3">
             <AuthArea mobile />
+            <ThemeToggle />
           </div>
         </div>
       ) : null}

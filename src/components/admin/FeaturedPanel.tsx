@@ -33,7 +33,7 @@ export function FeaturedPanel({ assets }: { assets: Asset[] }) {
   if (assets.length === 0) {
     return (
       <div className="panel px-6 py-16 text-center">
-        <p className="text-lg font-semibold text-white">Nothing approved yet</p>
+        <p className="text-lg font-semibold text-title">Nothing approved yet</p>
         <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
           Approve assets in the moderation queue first — only approved assets can be featured on
           the homepage.
@@ -67,7 +67,7 @@ export function FeaturedPanel({ assets }: { assets: Asset[] }) {
                 className="object-cover"
               />
               {asset.featured ? (
-                <span className="absolute left-3 top-3 rounded-md border border-accent/50 bg-accent/80 px-2 py-0.5 text-[11px] font-semibold text-white backdrop-blur">
+                <span className="absolute left-3 top-3 rounded-md border border-accent/50 bg-accent/80 px-2 py-0.5 text-[11px] font-semibold text-title backdrop-blur">
                   Featured
                 </span>
               ) : null}
@@ -76,7 +76,7 @@ export function FeaturedPanel({ assets }: { assets: Asset[] }) {
             <div className="p-4">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <h3 className="truncate text-sm font-semibold text-white">{asset.title}</h3>
+                  <h3 className="truncate text-sm font-semibold text-title">{asset.title}</h3>
                   <p className="truncate text-xs text-muted">
                     {asset.author?.username ?? "Unknown"} · {formatNumber(asset.downloads)}{" "}
                     downloads
@@ -100,8 +100,8 @@ export function FeaturedPanel({ assets }: { assets: Asset[] }) {
                   onClick={() => toggle(asset)}
                   className={`rounded-lg px-3 py-1.5 text-xs font-medium transition disabled:opacity-50 ${
                     asset.featured
-                      ? "border border-line bg-panel2 text-muted hover:text-white"
-                      : "bg-accent text-white hover:bg-accent-hover"
+                      ? "border border-line bg-panel2 text-muted hover:text-title"
+                      : "bg-accent text-title hover:bg-accent-hover"
                   }`}
                 >
                   {busyId === asset.id

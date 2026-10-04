@@ -48,7 +48,7 @@ export function QueueList({ items }: { items: Asset[] }) {
   if (items.length === 0) {
     return (
       <div className="panel px-6 py-16 text-center">
-        <p className="text-lg font-semibold text-white">Queue is clear</p>
+        <p className="text-lg font-semibold text-title">Queue is clear</p>
         <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
           Nothing to moderate right now. New submissions appear here as soon as publishers hit
           “Submit for review”.
@@ -88,7 +88,7 @@ export function QueueList({ items }: { items: Asset[] }) {
             <div className="min-w-0">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h3 className="text-lg font-semibold text-white">{asset.title}</h3>
+                  <h3 className="text-lg font-semibold text-title">{asset.title}</h3>
                   <p className="mt-0.5 text-sm text-muted">
                     by {asset.author?.username ?? "Unknown"} (@{asset.author?.handle ?? "—"}) ·{" "}
                     {formatDate(asset.created_at)}
@@ -152,7 +152,7 @@ export function QueueList({ items }: { items: Asset[] }) {
                     href={`/api/assets/${asset.id}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-lg border border-line bg-panel2 px-3.5 py-2.5 text-sm text-mist transition hover:border-accent/50 hover:text-white"
+                    className="rounded-lg border border-line bg-panel2 px-3.5 py-2.5 text-sm text-mist transition hover:border-accent/50 hover:text-title"
                   >
                     Raw JSON
                   </a>
@@ -161,7 +161,7 @@ export function QueueList({ items }: { items: Asset[] }) {
                       type="button"
                       disabled={busyId === asset.id}
                       onClick={() => moderate(asset, "approve")}
-                      className="rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:opacity-50"
+                      className="rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-medium text-title transition hover:bg-emerald-500 disabled:opacity-50"
                     >
                       {busyId === asset.id ? "…" : "Approve"}
                     </button>

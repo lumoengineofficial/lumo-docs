@@ -20,7 +20,7 @@ export default async function AdminFeaturedPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold tracking-tight text-white">Homepage features</h2>
+        <h2 className="text-xl font-bold tracking-tight text-title">Homepage features</h2>
         <p className="mt-1 text-sm text-muted">
           {featuredCount} of {sorted.length} approved assets currently appear in the featured
           carousel.

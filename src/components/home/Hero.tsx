@@ -26,7 +26,7 @@ export function Hero() {
             Lumo Engine v1.0.0 is out
           </span>
 
-          <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-title sm:text-5xl lg:text-6xl">
             Assets for
             <br />
             <span className="text-gradient">Lumo Engine</span>
@@ -106,7 +106,7 @@ export function Hero() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-white">{card.title}</p>
+                    <p className="truncate text-sm font-semibold text-title">{card.title}</p>
                     <p className="truncate text-xs text-muted">{card.meta}</p>
                   </div>
                   <span className="ml-auto rounded-md border border-accent/40 bg-accent-soft px-2 py-1 text-[10px] font-medium text-accent-light">

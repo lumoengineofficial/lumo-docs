@@ -32,14 +32,14 @@ export function Pagination({
   return (
     <nav className="mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
       <p className="text-sm text-muted">
-        Page <span className="text-white">{page}</span> of {pageCount}
+        Page <span className="text-title">{page}</span> of {pageCount}
       </p>
 
       <div className="flex flex-wrap items-center gap-1.5">
         {page > 1 ? (
           <Link
             href={pageHref(page - 1)}
-            className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-white"
+            className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-title"
           >
             ← Prev
           </Link>
@@ -60,8 +60,8 @@ export function Pagination({
               className={cn(
                 "min-w-9 rounded-lg border px-3 py-2 text-center text-sm transition",
                 p === page
-                  ? "border-accent bg-accent text-white"
-                  : "border-line bg-panel text-mist hover:border-accent/50 hover:text-white",
+                  ? "border-accent bg-accent text-title"
+                  : "border-line bg-panel text-mist hover:border-accent/50 hover:text-title",
               )}
             >
               {p}
@@ -72,7 +72,7 @@ export function Pagination({
         {page < pageCount ? (
           <Link
             href={pageHref(page + 1)}
-            className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-white"
+            className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-title"
           >
             Next →
           </Link>

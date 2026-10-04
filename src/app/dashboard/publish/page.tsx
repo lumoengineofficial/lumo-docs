@@ -13,7 +13,7 @@ export default function PublishPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold tracking-tight text-white">Publish a new asset</h2>
+        <h2 className="text-xl font-bold tracking-tight text-title">Publish a new asset</h2>
         <p className="mt-1.5 text-sm text-muted">
           Fill in the metadata, attach the zip and submit. Every submission is reviewed before it
           appears in the store.

@@ -35,14 +35,14 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-line bg-[#080b12]">
+    <footer className="mt-24 border-t border-line bg-panel2">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
             <Link href="/" className="flex items-center gap-2.5">
               <LumoMark className="h-8 w-8" />
               <span className="flex flex-col leading-tight">
-                <span className="text-[15px] font-bold tracking-tight text-white">Lumo</span>
+                <span className="text-[15px] font-bold tracking-tight text-title">Lumo</span>
                 <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-accent-light">
                   Asset Store
                 </span>
@@ -56,7 +56,7 @@ export function SiteFooter() {
 
           {columns.map((col) => (
             <div key={col.title}>
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-title">
                 {col.title}
               </h3>
               <ul className="space-y-2.5">

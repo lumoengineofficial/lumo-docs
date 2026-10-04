@@ -52,14 +52,14 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
               className="h-24 w-24 rounded-2xl border border-line object-cover shadow-card"
             />
           ) : (
-            <div className="accent-gradient flex h-24 w-24 items-center justify-center rounded-2xl border border-line text-3xl font-bold text-white shadow-card">
+            <div className="accent-gradient flex h-24 w-24 items-center justify-center rounded-2xl border border-line text-3xl font-bold text-title shadow-card">
               {(profile.username || "?").slice(0, 1).toUpperCase()}
             </div>
           )}
 
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-3xl font-bold tracking-tight text-white">{profile.username}</h1>
+              <h1 className="text-3xl font-bold tracking-tight text-title">{profile.username}</h1>
               {profile.role === "admin" ? <Badge tone="accent">Lumo team</Badge> : null}
             </div>
             <p className="mt-1 text-sm text-muted">@{profile.handle}</p>
@@ -74,7 +74,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                 <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
                   {label}
                 </dt>
-                <dd className="mt-1 text-2xl font-bold text-white">{value}</dd>
+                <dd className="mt-1 text-2xl font-bold text-title">{value}</dd>
               </div>
             ))}
           </dl>
@@ -83,7 +83,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
 
       <section className="mt-10">
         <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
-          <h2 className="text-xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-title">
             Assets by {profile.username}
           </h2>
           <span className="text-sm text-muted">{assets.length} published</span>

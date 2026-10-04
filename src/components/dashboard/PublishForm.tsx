@@ -187,7 +187,7 @@ export function PublishForm({ asset }: { asset?: Asset }) {
               className={`rounded-lg border px-4 py-2 text-sm transition ${
                 free
                   ? "border-accent bg-accent-soft text-accent-light"
-                  : "border-line bg-ink text-muted hover:text-white"
+                  : "border-line bg-ink text-muted hover:text-title"
               }`}
             >
               Free
@@ -198,7 +198,7 @@ export function PublishForm({ asset }: { asset?: Asset }) {
               className={`rounded-lg border px-4 py-2 text-sm transition ${
                 !free
                   ? "border-accent bg-accent-soft text-accent-light"
-                  : "border-line bg-ink text-muted hover:text-white"
+                  : "border-line bg-ink text-muted hover:text-title"
               }`}
             >
               Paid (USD)
@@ -234,7 +234,7 @@ export function PublishForm({ asset }: { asset?: Asset }) {
               type="file"
               accept=".zip,application/zip,application/x-zip-compressed"
               onChange={(e) => setZip(e.target.files?.[0] ?? null)}
-              className="input-base file:mr-3 file:rounded-md file:border-0 file:bg-panel2 file:px-3 file:py-1.5 file:text-xs file:text-mist hover:file:bg-accent hover:file:text-white"
+              className="input-base file:mr-3 file:rounded-md file:border-0 file:bg-panel2 file:px-3 file:py-1.5 file:text-xs file:text-mist hover:file:bg-accent hover:file:text-title"
             />
             <p className="mt-1.5 text-xs text-muted">
               Zip the asset folder (max {formatBytes(MAX_ZIP)}).
@@ -250,7 +250,7 @@ export function PublishForm({ asset }: { asset?: Asset }) {
               type="file"
               accept="image/*"
               onChange={(e) => setThumb(e.target.files?.[0] ?? null)}
-              className="input-base file:mr-3 file:rounded-md file:border-0 file:bg-panel2 file:px-3 file:py-1.5 file:text-xs file:text-mist hover:file:bg-accent hover:file:text-white"
+              className="input-base file:mr-3 file:rounded-md file:border-0 file:bg-panel2 file:px-3 file:py-1.5 file:text-xs file:text-mist hover:file:bg-accent hover:file:text-title"
             />
             <p className="mt-1.5 text-xs text-muted">16:10 preview image (max {formatBytes(MAX_IMAGE)}).</p>
           </div>

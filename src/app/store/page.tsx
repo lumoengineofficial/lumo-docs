@@ -48,7 +48,7 @@ export default async function StorePage({ searchParams }: StorePageProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-light">
           Asset store
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-title sm:text-4xl">
           {category || "All assets"}
         </h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">

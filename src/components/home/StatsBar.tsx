@@ -18,7 +18,7 @@ export function StatsBar({ stats }: { stats: StoreStats }) {
             href={item.href}
             className="group flex flex-col items-center bg-ink px-6 py-10 text-center transition hover:bg-panel"
           >
-            <span className="text-4xl font-extrabold tracking-tight text-white transition group-hover:text-accent-light sm:text-5xl">
+            <span className="text-4xl font-extrabold tracking-tight text-title transition group-hover:text-accent-light sm:text-5xl">
               {formatNumber(item.value)}
             </span>
             <span className="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-muted">

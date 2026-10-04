@@ -40,7 +40,7 @@ export default async function DashboardPage() {
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
               {stat.label}
             </p>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-white">{stat.value}</p>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-title">{stat.value}</p>
             <p className="mt-1 text-xs text-muted">{stat.hint}</p>
           </div>
         ))}
@@ -49,7 +49,7 @@ export default async function DashboardPage() {
       <section className="panel overflow-hidden">
         <div className="flex flex-col gap-3 border-b border-line px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-base font-semibold text-white">My assets</h2>
+            <h2 className="text-base font-semibold text-title">My assets</h2>
             <p className="text-xs text-muted">
               {rejected > 0
                 ? `${rejected} rejected — open the asset to read admin feedback.`
@@ -63,7 +63,7 @@ export default async function DashboardPage() {
 
         {assets.length === 0 ? (
           <div className="px-5 py-14 text-center">
-            <p className="text-sm font-medium text-white">No assets yet</p>
+            <p className="text-sm font-medium text-title">No assets yet</p>
             <p className="mx-auto mt-1.5 max-w-sm text-sm text-muted">
               Upload your first pack — models, textures, audio or an editor plugin — and it lands
               in the moderation queue.
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
                     <td className="px-5 py-3.5">
                       <Link
                         href={`/asset/${asset.slug}`}
-                        className="font-medium text-white transition hover:text-accent-light"
+                        className="font-medium text-title transition hover:text-accent-light"
                       >
                         {asset.title}
                       </Link>

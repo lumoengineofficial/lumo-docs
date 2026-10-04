@@ -5,6 +5,7 @@ const config: Config = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./content/**/*.{md,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -12,16 +13,17 @@ const config: Config = {
           DEFAULT: "#cf6dfc",
           hover: "#b955e8",
           soft: "#cf6dfc1a",
-          light: "#c1bfff",
+          light: "rgb(var(--c-accent-light) / <alpha-value>)",
         },
         olive: "#bdb96a",
         cream: "#fdfbd4",
-        ink: "#0a0e17",
-        panel: "#111726",
-        panel2: "#161d30",
-        line: "#1f2740",
-        mist: "#e6eaf5",
-        muted: "#8b93ad",
+        ink: "rgb(var(--c-bg) / <alpha-value>)",
+        panel: "rgb(var(--c-panel) / <alpha-value>)",
+        panel2: "rgb(var(--c-panel2) / <alpha-value>)",
+        line: "rgb(var(--c-line) / <alpha-value>)",
+        mist: "rgb(var(--c-mist) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
+        title: "rgb(var(--c-title) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
@@ -32,7 +34,7 @@ const config: Config = {
         card: "0 18px 40px -24px rgba(0, 0, 0, 0.9)",
       },
       backgroundImage: {
-        grid: "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+        grid: "linear-gradient(to right, var(--c-grid) 1px, transparent 1px), linear-gradient(to bottom, var(--c-grid) 1px, transparent 1px)",
       },
       keyframes: {
         marquee: {

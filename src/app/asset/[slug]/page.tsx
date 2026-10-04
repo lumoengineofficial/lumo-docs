@@ -103,7 +103,7 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
               <Badge>{asset.license}</Badge>
             </div>
 
-            <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-title sm:text-4xl">
               {asset.title}
             </h1>
 
@@ -126,7 +126,7 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
             </div>
 
             <div className="mt-6 rounded-2xl border border-line bg-panel p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-title">
                 About this asset
               </h2>
               <p className="mt-3 whitespace-pre-wrap text-[15px] leading-relaxed text-mist/80">
@@ -149,7 +149,7 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
             </div>
 
             <div className="mt-6 rounded-2xl border border-line bg-gradient-to-b from-panel2 to-panel p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-title">
                 Install in Lumo Engine
               </h2>
               <ol className="mt-4 space-y-4">
@@ -159,7 +159,7 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                       {index + 1}
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-white">{step.title}</p>
+                      <p className="text-sm font-medium text-title">{step.title}</p>
                       <p className="mt-0.5 text-sm leading-relaxed text-muted">{step.body}</p>
                     </div>
                   </li>
@@ -201,7 +201,7 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                   size="md"
                 />
                 <span>
-                  <span className="block text-sm font-semibold text-white">
+                  <span className="block text-sm font-semibold text-title">
                     {asset.author.username}
                   </span>
                   <span className="block text-xs text-muted">@{asset.author.handle}</span>
@@ -224,10 +224,10 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
       {related.length > 0 ? (
         <section className="mt-16 border-t border-line pt-10">
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-xl font-bold tracking-tight text-white">Related assets</h2>
+            <h2 className="text-xl font-bold tracking-tight text-title">Related assets</h2>
             <Link
               href={`/store?category=${encodeURIComponent(asset.category)}`}
-              className="text-sm font-medium text-accent-light transition hover:text-white"
+              className="text-sm font-medium text-accent-light transition hover:text-title"
             >
               More in {asset.category} →
             </Link>

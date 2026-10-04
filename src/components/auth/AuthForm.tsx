@@ -107,7 +107,7 @@ export function AuthForm({ mode }: AuthFormProps) {
     <div className="w-full max-w-md">
       <div className="mb-6 flex flex-col items-center text-center">
         <LumoMark className="h-11 w-11" />
-        <h1 className="mt-4 text-2xl font-bold tracking-tight text-white">
+        <h1 className="mt-4 text-2xl font-bold tracking-tight text-title">
           {isSignup ? "Create your publisher account" : "Welcome back"}
         </h1>
         <p className="mt-2 text-sm text-muted">

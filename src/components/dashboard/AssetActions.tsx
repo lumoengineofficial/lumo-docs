@@ -33,7 +33,7 @@ export function AssetActions({ asset }: { asset: Asset }) {
       {asset.status === "approved" ? (
         <Link
           href={`/asset/${asset.slug}`}
-          className="rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-mist transition hover:border-accent/50 hover:text-white"
+          className="rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-mist transition hover:border-accent/50 hover:text-title"
         >
           View
         </Link>
@@ -41,7 +41,7 @@ export function AssetActions({ asset }: { asset: Asset }) {
 
       <Link
         href={`/dashboard/edit/${asset.id}`}
-        className="rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-mist transition hover:border-accent/50 hover:text-white"
+        className="rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-mist transition hover:border-accent/50 hover:text-title"
       >
         Edit
       </Link>

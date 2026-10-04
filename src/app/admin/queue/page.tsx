@@ -38,7 +38,7 @@ export default async function AdminQueuePage({ searchParams }: QueuePageProps) {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-white">Moderation queue</h2>
+          <h2 className="text-xl font-bold tracking-tight text-title">Moderation queue</h2>
           <p className="mt-1 text-sm text-muted">
             Approve to publish instantly, or reject with a comment the author will see on their
             dashboard.
@@ -58,7 +58,7 @@ export default async function AdminQueuePage({ searchParams }: QueuePageProps) {
               "rounded-lg border px-3.5 py-2 text-sm transition",
               status === tab.key
                 ? "border-accent bg-accent-soft text-accent-light"
-                : "border-line bg-panel text-muted hover:border-accent/40 hover:text-white",
+                : "border-line bg-panel text-muted hover:border-accent/40 hover:text-title",
             )}
           >
             {tab.label}

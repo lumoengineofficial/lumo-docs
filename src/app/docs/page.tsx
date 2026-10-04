@@ -70,19 +70,19 @@ export default async function DocsIndexPage() {
             href={`/docs/${item.slug}`}
             className="group rounded-xl border border-line bg-panel p-4 transition hover:-translate-y-0.5 hover:border-accent/50"
           >
-            <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/30 bg-accent-soft text-accent-light transition group-hover:bg-accent group-hover:text-white">
+            <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/30 bg-accent-soft text-accent-light transition group-hover:bg-accent group-hover:text-title">
               <svg viewBox="0 0 24 24" fill="none" className="h-4.5 w-4.5" aria-hidden="true">
                 {item.icon}
               </svg>
             </div>
-            <p className="text-sm font-semibold text-white transition group-hover:text-accent-light">
+            <p className="text-sm font-semibold text-title transition group-hover:text-accent-light">
               {item.label}
             </p>
           </Link>
         ))}
       </div>
 
-      <h2 id="all-guides" className="mt-10 border-b border-line pb-2 text-xl font-semibold text-white">
+      <h2 id="all-guides" className="mt-10 border-b border-line pb-2 text-xl font-semibold text-title">
         All guides
       </h2>
       <ul className="mt-4 space-y-3">
@@ -93,7 +93,7 @@ export default async function DocsIndexPage() {
               className="group flex items-start justify-between gap-4 rounded-xl border border-line bg-panel px-4 py-3.5 transition hover:border-accent/50"
             >
               <span>
-                <span className="block text-[15px] font-medium text-white transition group-hover:text-accent-light">
+                <span className="block text-[15px] font-medium text-title transition group-hover:text-accent-light">
                   {doc.title}
                 </span>
                 <span className="mt-0.5 block text-sm text-muted">{doc.description}</span>
@@ -109,14 +109,14 @@ export default async function DocsIndexPage() {
       <div className="mt-8 rounded-xl border border-accent/30 bg-accent-soft p-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h3 className="text-sm font-semibold text-white">Integrating with the store?</h3>
+            <h3 className="text-sm font-semibold text-title">Integrating with the store?</h3>
             <p className="mt-1 text-sm text-muted">
               The editor&apos;s Asset Store tab talks to a public REST API.
             </p>
           </div>
           <Link
             href="/api-docs"
-            className="rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-white transition hover:bg-accent-hover"
+            className="rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-title transition hover:bg-accent-hover"
           >
             API reference
           </Link>

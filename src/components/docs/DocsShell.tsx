@@ -28,7 +28,7 @@ export function DocsShell({
   return (
     <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[240px_1fr_210px] lg:px-8">
       <aside className="lg:sticky lg:top-24 lg:h-fit">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-title">
           {sidebarTitle}
         </p>
         <nav className="flex flex-col gap-1">
@@ -42,7 +42,7 @@ export function DocsShell({
                   "rounded-lg px-3 py-2 text-sm transition",
                   active
                     ? "bg-accent-soft font-medium text-accent-light"
-                    : "text-muted hover:bg-panel2 hover:text-white",
+                    : "text-muted hover:bg-panel2 hover:text-title",
                 )}
               >
                 {doc.title}
@@ -54,13 +54,13 @@ export function DocsShell({
         <div className="mt-6 space-y-1 border-t border-line pt-6">
           <Link
             href="/api-docs"
-            className="block rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-panel2 hover:text-white"
+            className="block rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-panel2 hover:text-title"
           >
             REST API reference
           </Link>
           <Link
             href="/store"
-            className="block rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-panel2 hover:text-white"
+            className="block rounded-lg px-3 py-2 text-sm text-muted transition hover:bg-panel2 hover:text-title"
           >
             Browse the store
           </Link>
@@ -71,7 +71,7 @@ export function DocsShell({
 
       <article className="min-w-0">
         <div className="mb-6 border-b border-line pb-6">
-          <h1 className="text-3xl font-bold tracking-tight text-white">{title}</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-title">{title}</h1>
           {description ? (
             <p className="mt-3 text-[15px] leading-relaxed text-muted">{description}</p>
           ) : null}
@@ -82,12 +82,12 @@ export function DocsShell({
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-line bg-panel px-5 py-4">
           <div>
-            <p className="text-sm font-medium text-white">Was this page helpful?</p>
+            <p className="text-sm font-medium text-title">Was this page helpful?</p>
             <p className="text-xs text-muted">Tell the Lumo team what is missing.</p>
           </div>
           <Link
             href="https://github.com/lumoengineofficial/lumo/issues"
-            className="rounded-lg border border-accent/50 bg-accent-soft px-3.5 py-2 text-sm font-medium text-accent-light transition hover:bg-accent hover:text-white"
+            className="rounded-lg border border-accent/50 bg-accent-soft px-3.5 py-2 text-sm font-medium text-accent-light transition hover:bg-accent hover:text-title"
           >
             Open an issue
           </Link>
@@ -97,7 +97,7 @@ export function DocsShell({
       <nav className="hidden lg:sticky lg:top-24 lg:block lg:h-fit">
         {toc && toc.length > 0 ? (
           <>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-title">
               On this page
             </p>
             <ul className="space-y-1.5 border-l border-line">

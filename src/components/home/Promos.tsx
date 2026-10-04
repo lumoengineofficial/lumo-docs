@@ -77,12 +77,12 @@ export function DocsTeaser({ docs }: { docs: DocMeta[] }) {
             href={`/docs/${doc.slug}`}
             className="group rounded-2xl border border-line bg-panel p-5 transition hover:-translate-y-0.5 hover:border-accent/50"
           >
-            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-panel2 text-accent-light transition group-hover:border-accent/40 group-hover:bg-accent group-hover:text-white">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-panel2 text-accent-light transition group-hover:border-accent/40 group-hover:bg-accent group-hover:text-title">
               <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
                 {docIcons[doc.slug] ?? docIcons["getting-started"]}
               </svg>
             </div>
-            <h3 className="text-[15px] font-semibold text-white transition group-hover:text-accent-light">
+            <h3 className="text-[15px] font-semibold text-title transition group-hover:text-accent-light">
               {doc.title}
             </h3>
             <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted">
@@ -98,14 +98,14 @@ export function DocsTeaser({ docs }: { docs: DocMeta[] }) {
 export function SupportCta() {
   return (
     <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-      <div className="relative overflow-hidden rounded-3xl border border-accent/30 bg-gradient-to-br from-panel via-panel2 to-[#151b33] p-8 sm:p-12">
+      <div className="relative overflow-hidden rounded-3xl border border-accent/30 bg-gradient-to-br from-panel via-panel2 to-panel2 p-8 sm:p-12">
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent/30 blur-[100px]" />
         <div className="relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-light">
               Community support
             </p>
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-title sm:text-3xl">
               Found a bug, or need an asset that doesn&apos;t exist yet?
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-muted">

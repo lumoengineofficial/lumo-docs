@@ -40,7 +40,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-light">
             Publisher dashboard
           </p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          <h1 className="mt-2 text-2xl font-bold tracking-tight text-title sm:text-3xl">
             Welcome back, {profile.username}
           </h1>
         </div>
@@ -48,7 +48,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           {profile.role === "admin" ? <Badge tone="accent">Admin</Badge> : null}
           <Link
             href={`/author/${profile.handle}`}
-            className="rounded-lg border border-line bg-panel px-3.5 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-white"
+            className="rounded-lg border border-line bg-panel px-3.5 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-title"
           >
             View public profile
           </Link>
@@ -64,7 +64,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                 href={item.href}
                 className={cn(
                   "flex shrink-0 items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition",
-                  "text-muted hover:bg-panel2 hover:text-white",
+                  "text-muted hover:bg-panel2 hover:text-title",
                 )}
               >
                 <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
@@ -76,7 +76,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           </nav>
 
           <div className="mt-6 hidden rounded-xl border border-line bg-panel p-4 lg:block">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-title">
               Review policy
             </p>
             <p className="mt-2 text-xs leading-relaxed text-muted">

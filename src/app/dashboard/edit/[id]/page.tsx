@@ -33,7 +33,7 @@ export default async function EditAssetPage({ params }: EditPageProps) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-3">
-            <h2 className="text-xl font-bold tracking-tight text-white">{asset.title}</h2>
+            <h2 className="text-xl font-bold tracking-tight text-title">{asset.title}</h2>
             <StatusBadge status={asset.status} />
           </div>
           <p className="mt-1.5 text-sm text-muted">

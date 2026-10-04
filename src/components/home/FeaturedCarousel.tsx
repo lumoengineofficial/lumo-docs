@@ -22,7 +22,7 @@ export function FeaturedCarousel({ assets }: { assets: Asset[] }) {
           type="button"
           onClick={() => scrollBy(-1)}
           aria-label="Scroll featured assets left"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-panel text-mist transition hover:border-accent/50 hover:text-white"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-panel text-mist transition hover:border-accent/50 hover:text-title"
         >
           ←
         </button>
@@ -30,7 +30,7 @@ export function FeaturedCarousel({ assets }: { assets: Asset[] }) {
           type="button"
           onClick={() => scrollBy(1)}
           aria-label="Scroll featured assets right"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-panel text-mist transition hover:border-accent/50 hover:text-white"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-panel text-mist transition hover:border-accent/50 hover:text-title"
         >
           →
         </button>

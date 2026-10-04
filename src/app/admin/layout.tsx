@@ -21,7 +21,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-light">
               Admin panel
             </p>
-            <h1 className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 className="mt-2 text-2xl font-bold tracking-tight text-title sm:text-3xl">
               Store administration
             </h1>
           </div>
@@ -36,7 +36,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             <Link
               key={tab.href}
               href={tab.href}
-              className="rounded-lg border border-line bg-panel px-3.5 py-2 text-sm text-muted transition hover:border-accent/50 hover:text-white"
+              className="rounded-lg border border-line bg-panel px-3.5 py-2 text-sm text-muted transition hover:border-accent/50 hover:text-title"
             >
               {tab.label}
             </Link>

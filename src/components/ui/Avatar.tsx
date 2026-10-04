@@ -34,7 +34,7 @@ export function Avatar({
   return (
     <span
       className={cn(
-        "accent-gradient flex shrink-0 items-center justify-center font-bold text-white",
+        "accent-gradient flex shrink-0 items-center justify-center font-bold text-title",
         SIZES[size],
         className,
       )}

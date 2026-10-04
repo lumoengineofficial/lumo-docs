@@ -46,11 +46,11 @@ export function UsersPanel({ users, currentUserId }: { users: Profile[]; current
             <tr key={user.id} className="border-t border-line/70">
               <td className="px-5 py-3.5">
                 <div className="flex items-center gap-3">
-                  <span className="accent-gradient flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold text-white">
+                  <span className="accent-gradient flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold text-title">
                     {(user.username || "?").slice(0, 1).toUpperCase()}
                   </span>
                   <div className="min-w-0">
-                    <p className="truncate font-medium text-white">
+                    <p className="truncate font-medium text-title">
                       {user.username}
                       {user.id === currentUserId ? (
                         <span className="ml-2 text-xs text-muted">(you)</span>
@@ -81,7 +81,7 @@ export function UsersPanel({ users, currentUserId }: { users: Profile[]; current
                     onClick={() =>
                       update(user.id, { role: user.role === "admin" ? "user" : "admin" })
                     }
-                    className="rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-mist transition hover:border-accent/50 hover:text-white disabled:opacity-40"
+                    className="rounded-md border border-line bg-panel2 px-2.5 py-1.5 text-xs text-mist transition hover:border-accent/50 hover:text-title disabled:opacity-40"
                   >
                     {busyId === user.id
                       ? "…"

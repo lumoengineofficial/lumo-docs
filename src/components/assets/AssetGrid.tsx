@@ -26,7 +26,7 @@ export function AssetGrid({
             <path d="m3 7.5 9 4.5 9-4.5M12 12v9" stroke="currentColor" strokeWidth="1.5" />
           </svg>
         </div>
-        <h3 className="text-lg font-semibold text-white">{emptyTitle}</h3>
+        <h3 className="text-lg font-semibold text-title">{emptyTitle}</h3>
         <p className="mt-1.5 max-w-sm text-sm text-muted">{emptyHint}</p>
       </div>
     );

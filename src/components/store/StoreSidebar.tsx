@@ -24,7 +24,7 @@ export function StoreSidebar({
     <aside className="flex flex-col gap-6">
       <div>
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-title">
             Category
           </h2>
           {activeCategory ? (
@@ -44,7 +44,7 @@ export function StoreSidebar({
                 "flex items-center justify-between rounded-lg px-3 py-2 text-sm transition",
                 !activeCategory
                   ? "bg-accent-soft text-accent-light"
-                  : "text-muted hover:bg-panel2 hover:text-white",
+                  : "text-muted hover:bg-panel2 hover:text-title",
               )}
             >
               <span>All assets</span>
@@ -60,7 +60,7 @@ export function StoreSidebar({
                     "flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm transition",
                     active
                       ? "bg-accent-soft text-accent-light"
-                      : "text-muted hover:bg-panel2 hover:text-white",
+                      : "text-muted hover:bg-panel2 hover:text-title",
                   )}
                 >
                   <span className="truncate">{category}</span>
@@ -75,7 +75,7 @@ export function StoreSidebar({
       </div>
 
       <div>
-        <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white">Price</h2>
+        <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-title">Price</h2>
         <div className="space-y-1">
           {PRICE_OPTIONS.map((option) => {
             const active = (current.price ?? "all") === option.value;
@@ -85,7 +85,7 @@ export function StoreSidebar({
                 href={storePath(basePath, { price: option.value, page: 1 }, current)}
                 className={cn(
                   "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition",
-                  active ? "bg-accent-soft text-accent-light" : "text-muted hover:bg-panel2 hover:text-white",
+                  active ? "bg-accent-soft text-accent-light" : "text-muted hover:bg-panel2 hover:text-title",
                 )}
               >
                 <span
@@ -102,7 +102,7 @@ export function StoreSidebar({
       </div>
 
       <div className="panel bg-gradient-to-b from-panel2 to-panel p-4">
-        <h3 className="text-sm font-semibold text-white">Publish your work</h3>
+        <h3 className="text-sm font-semibold text-title">Publish your work</h3>
         <p className="mt-1.5 text-xs leading-relaxed text-muted">
           Ship models, audio or editor plugins to thousands of Lumo developers.
         </p>

@@ -57,7 +57,7 @@ export function StoreToolbar({
         />
         <button
           type="submit"
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-panel2 px-2.5 py-1.5 text-xs font-medium text-mist transition hover:bg-accent hover:text-white"
+          className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-panel2 px-2.5 py-1.5 text-xs font-medium text-mist transition hover:bg-accent hover:text-title"
         >
           Search
         </button>

@@ -18,7 +18,7 @@ export default async function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold tracking-tight text-white">Users</h2>
+        <h2 className="text-xl font-bold tracking-tight text-title">Users</h2>
         <p className="mt-1 text-sm text-muted">
           Promote trusted publishers to admin, or suspend accounts that break the guidelines.
         </p>

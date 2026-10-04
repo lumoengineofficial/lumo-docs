@@ -14,7 +14,7 @@ export function Gallery({ images, alt }: { images: string[]; alt: string }) {
       <button
         type="button"
         onClick={() => setLightbox(true)}
-        className="group relative block aspect-[16/10] w-full overflow-hidden rounded-2xl border border-line bg-[#0c111d]"
+        className="group relative block aspect-[16/10] w-full overflow-hidden rounded-2xl border border-line bg-panel2"
         aria-label={`Open ${alt} preview`}
       >
         <Image

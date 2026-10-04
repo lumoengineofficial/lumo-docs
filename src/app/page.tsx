@@ -38,7 +38,7 @@ export default async function HomePage() {
           actions={
             <Link
               href="/store"
-              className="text-sm font-medium text-accent-light transition hover:text-white"
+              className="text-sm font-medium text-accent-light transition hover:text-title"
             >
               View all assets →
             </Link>

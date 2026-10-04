@@ -2,8 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens — light is the default, .dark on <html> switches to dark. */
 :root {
+  color-scheme: light;
+  --c-bg: 250 249 244;
+  --c-panel: 255 255 255;
+  --c-panel2: 243 241 229;
+  --c-line: 227 223 206;
+  --c-mist: 26 26 32;
+  --c-muted: 109 107 119;
+  --c-title: 20 18 25;
+  --c-accent-light: 140 47 216;
+  --c-grid: rgba(20, 18, 25, 0.05);
+  --c-scroll: 214 209 190;
+  --grad-accent-from: #cf6dfc;
+  --grad-accent-via: #c1bfff;
+  --grad-accent-to: #fdfbd4;
+  --grad-text-from: #cf6dfc;
+  --grad-text-via: #9d8ff5;
+  --grad-text-to: #6d6b7a;
+}
+
+.dark {
   color-scheme: dark;
+  --c-bg: 10 14 23;
+  --c-panel: 17 23 38;
+  --c-panel2: 22 29 48;
+  --c-line: 31 39 64;
+  --c-mist: 230 234 245;
+  --c-muted: 139 147 173;
+  --c-title: 255 255 255;
+  --c-accent-light: 193 191 255;
+  --c-grid: rgba(255, 255, 255, 0.035);
+  --c-scroll: 38 48 77;
+  --grad-accent-from: #fdfbd4;
+  --grad-accent-via: #c1bfff;
+  --grad-accent-to: #cf6dfc;
+  --grad-text-from: #ffffff;
+  --grad-text-via: #e6eaf5;
+  --grad-text-to: #8b93ad;
 }
 
 html {
@@ -23,7 +60,7 @@ body {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #26304d transparent;
+  scrollbar-color: rgb(var(--c-scroll)) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -32,7 +69,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #26304d;
+  background: rgb(var(--c-scroll));
   border-radius: 999px;
   border: 3px solid transparent;
   background-clip: content-box;
@@ -64,19 +101,32 @@ body {
   }
 
   .surface-grid {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--c-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--c-grid) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-white via-mist to-muted bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to right,
+      var(--grad-text-from),
+      var(--grad-text-via),
+      var(--grad-text-to)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 
   .accent-gradient {
-    background: linear-gradient(135deg, #fdfbd4 0%, #c1bfff 55%, #cf6dfc 100%);
+    background: linear-gradient(
+      135deg,
+      var(--grad-accent-from) 0%,
+      var(--grad-accent-via) 55%,
+      var(--grad-accent-to) 100%
+    );
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -99,16 +149,16 @@ body {
 }
 
 .markdown h1 {
-  @apply mb-2 mt-0 text-3xl font-bold tracking-tight text-white;
+  @apply mb-2 mt-0 text-3xl font-bold tracking-tight text-title;
 }
 
 .markdown h2 {
-  @apply mb-1 mt-10 border-b border-line pb-2 text-xl font-semibold text-white;
+  @apply mb-1 mt-10 border-b border-line pb-2 text-xl font-semibold text-title;
   scroll-margin-top: 6rem;
 }
 
 .markdown h3 {
-  @apply mb-1 mt-8 text-lg font-semibold text-white;
+  @apply mb-1 mt-8 text-lg font-semibold text-title;
   scroll-margin-top: 6rem;
 }
 
@@ -137,7 +187,7 @@ body {
 }
 
 .markdown pre {
-  @apply overflow-x-auto rounded-xl border border-line bg-[#0b101c] p-4 text-[13px] leading-relaxed;
+  @apply overflow-x-auto rounded-xl border border-line bg-panel2 p-4 text-[13px] leading-relaxed;
 }
 
 .markdown pre code {
@@ -165,7 +215,7 @@ body {
 }
 
 .markdown strong {
-  @apply font-semibold text-white;
+  @apply font-semibold text-title;
 }
 
 .markdown img {
