@@ -8,6 +8,7 @@ import { getBrowserClient, supabaseConfigured } from "@/lib/supabase";
 import type { Profile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/Button";
+import { AdminBadge } from "@/components/ui/AdminBadge";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LumoMark } from "@/components/ui/LumoMark";
 
@@ -110,8 +111,9 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
             {initials(profile.username || profile.handle || "U")}
           </span>
         )}
-        <span className="max-w-[110px] truncate font-medium text-mist">
+        <span className="flex max-w-[110px] items-center gap-1.5 truncate font-medium text-mist">
           {profile.username || profile.handle}
+          {isAdmin ? <AdminBadge size={15} /> : null}
         </span>
       </button>
 
@@ -119,10 +121,11 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-line bg-panel shadow-card">
-            <div className="border-b border-line px-4 py-3">
+            <div className="flex items-center gap-1.5 border-b border-line px-4 py-3">
               <p className="truncate text-sm font-medium text-title">{profile.username}</p>
-              <p className="truncate text-xs text-muted">@{profile.handle}</p>
+              {isAdmin ? <AdminBadge size={15} /> : null}
             </div>
+            <p className="truncate px-4 pb-3 text-xs text-muted">@{profile.handle}</p>
             <div className="p-1.5">
               <Link
                 href="/dashboard"

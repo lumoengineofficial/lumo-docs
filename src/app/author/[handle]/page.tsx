@@ -5,6 +5,7 @@ import { pageMeta } from "@/lib/seo";
 import { formatDate, formatNumber } from "@/lib/utils";
 import { AssetGrid } from "@/components/assets/AssetGrid";
 import { Badge } from "@/components/ui/Badge";
+import { AdminBadge } from "@/components/ui/AdminBadge";
 
 export const dynamic = "force-dynamic";
 
@@ -60,7 +61,12 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-3xl font-bold tracking-tight text-title">{profile.username}</h1>
-              {profile.role === "admin" ? <Badge tone="accent">Lumo team</Badge> : null}
+              {profile.role === "admin" ? (
+                <>
+                  <AdminBadge size={22} label="Lumo team" />
+                  <Badge tone="accent">Lumo team</Badge>
+                </>
+              ) : null}
             </div>
             <p className="mt-1 text-sm text-muted">@{profile.handle}</p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mist/80">

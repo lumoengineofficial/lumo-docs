@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Asset } from "@/lib/types";
 import { formatNumber, placeholderImage, priceLabel } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
+import { AdminBadge } from "@/components/ui/AdminBadge";
 
 export function AssetCard({ asset }: { asset: Asset }) {
   const thumb = asset.thumbnail_url || placeholderImage(asset.slug, 800, 500);
@@ -50,6 +51,9 @@ export function AssetCard({ asset }: { asset: Asset }) {
             className="relative z-10 font-medium text-muted transition hover:text-accent-light"
           >
             {asset.author?.username ?? "Unknown"}
+            {asset.author?.role === "admin" ? (
+              <AdminBadge size={13} label="Lumo team" className="ml-1" />
+            ) : null}
           </Link>
           <span className="text-muted">↓ {formatNumber(asset.downloads)}</span>
         </div>

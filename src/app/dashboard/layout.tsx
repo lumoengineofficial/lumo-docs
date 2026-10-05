@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { requireUser } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
+import { AdminBadge } from "@/components/ui/AdminBadge";
 
 const NAV = [
   {
@@ -45,7 +46,12 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           </h1>
         </div>
         <div className="flex items-center gap-3">
-          {profile.role === "admin" ? <Badge tone="accent">Admin</Badge> : null}
+          {profile.role === "admin" ? (
+            <>
+              <AdminBadge size={18} />
+              <Badge tone="accent">Admin</Badge>
+            </>
+          ) : null}
           <Link
             href={`/author/${profile.handle}`}
             className="rounded-lg border border-line bg-panel px-3.5 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-title"

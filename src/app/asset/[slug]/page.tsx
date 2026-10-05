@@ -10,6 +10,7 @@ import { DownloadButton } from "@/components/asset/DownloadButton";
 import { Gallery } from "@/components/asset/Gallery";
 import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
+import { AdminBadge } from "@/components/ui/AdminBadge";
 
 export const dynamic = "force-dynamic";
 
@@ -119,6 +120,9 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                     size="sm"
                   />
                   {asset.author.username}
+                  {asset.author.role === "admin" ? (
+                    <AdminBadge size={15} label="Lumo team" />
+                  ) : null}
                 </Link>
               ) : null}
               <span>↓ {formatNumber(asset.downloads)} downloads</span>
@@ -201,8 +205,11 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                   size="md"
                 />
                 <span>
-                  <span className="block text-sm font-semibold text-title">
+                  <span className="flex items-center gap-1.5 text-sm font-semibold text-title">
                     {asset.author.username}
+                    {asset.author.role === "admin" ? (
+                      <AdminBadge size={15} label="Lumo team" />
+                    ) : null}
                   </span>
                   <span className="block text-xs text-muted">@{asset.author.handle}</span>
                 </span>
