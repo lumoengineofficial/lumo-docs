@@ -67,6 +67,15 @@ export function UsersPanel({ users, currentUserId }: { users: Profile[]; current
                     {user.role}
                   </Badge>
                   {user.banned ? <Badge tone="danger">banned</Badge> : null}
+                  {user.banned ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src="/suspended-stamp.jpg"
+                      alt="Suspended"
+                      title="Suspended"
+                      className="h-5 w-5 shrink-0 rounded-full object-cover"
+                    />
+                  ) : null}
                 </div>
                 {messages[user.id] ? (
                   <p className="mt-1 max-w-[180px] text-[11px] text-red-300">{messages[user.id]}</p>

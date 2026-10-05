@@ -50,6 +50,18 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
           <div className="absolute inset-0 surface-grid opacity-30" />
           <div className="absolute -right-12 -top-24 h-64 w-64 rounded-full bg-white/30 blur-[70px]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-panel via-panel/50 to-transparent" />
+          {profile.banned ? (
+            <div className="pointer-events-none absolute right-4 top-4 -rotate-12 sm:right-8 sm:top-6">
+              <div className="h-20 w-20 overflow-hidden rounded-full bg-white shadow-card ring-2 ring-red-500/50 sm:h-28 sm:w-28">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/suspended-stamp.jpg"
+                  alt="Suspended account"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
 
         <div className="relative -mt-14 px-6 pb-8 sm:-mt-16 sm:px-8">
@@ -100,6 +112,23 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
           </div>
         </div>
       </header>
+
+      {profile.banned ? (
+        <div className="mt-4 flex items-center gap-3 rounded-2xl border border-red-500/40 bg-red-500/10 px-5 py-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/suspended-stamp.jpg"
+            alt=""
+            className="h-9 w-9 shrink-0 rounded-full object-cover"
+          />
+          <div>
+            <p className="text-sm font-semibold text-red-400">Account suspended</p>
+            <p className="text-sm text-muted">
+              This creator&apos;s account has been suspended by the Lumo team.
+            </p>
+          </div>
+        </div>
+      ) : null}
 
       <section className="mt-10">
         <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
