@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 
 const SIZES = {
-  sm: "h-7 w-7 rounded-md text-[11px]",
-  md: "h-10 w-10 rounded-lg text-sm",
-  lg: "h-24 w-24 rounded-2xl text-3xl",
+  sm: "h-7 w-7 rounded-full text-[11px]",
+  md: "h-10 w-10 rounded-full text-sm",
+  lg: "h-24 w-24 rounded-full text-3xl",
 } as const;
 
 export function Avatar({

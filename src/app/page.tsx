@@ -8,6 +8,7 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { DocsTeaser, PluginsTeaser, SupportCta } from "@/components/home/Promos";
 import { StatsBar } from "@/components/home/StatsBar";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SpotlightSlider } from "@/components/home/SpotlightSlider";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,10 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+
+      <section className="mx-auto max-w-7xl px-4 pb-6 pt-4 sm:px-6 lg:px-8">
+        <SpotlightSlider assets={featured} />
+      </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <SectionHeading

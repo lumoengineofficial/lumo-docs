@@ -104,10 +104,10 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
           <img
             src={profile.avatar_url}
             alt={profile.username}
-            className="h-7 w-7 rounded-md object-cover"
+            className="h-7 w-7 rounded-full object-cover"
           />
         ) : (
-          <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-bold text-title">
+          <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-bold text-title">
             {initials(profile.username || profile.handle || "U")}
           </span>
         )}

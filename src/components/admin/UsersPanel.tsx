@@ -46,7 +46,7 @@ export function UsersPanel({ users, currentUserId }: { users: Profile[]; current
             <tr key={user.id} className="border-t border-line/70">
               <td className="px-5 py-3.5">
                 <div className="flex items-center gap-3">
-                  <span className="accent-gradient flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold text-title">
+                  <span className="accent-gradient flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-title">
                     {(user.username || "?").slice(0, 1).toUpperCase()}
                   </span>
                   <div className="min-w-0">
