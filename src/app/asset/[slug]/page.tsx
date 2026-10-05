@@ -11,6 +11,7 @@ import { Gallery } from "@/components/asset/Gallery";
 import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
 import { AdminBadge } from "@/components/ui/AdminBadge";
+import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
 
 export const dynamic = "force-dynamic";
 
@@ -110,20 +111,25 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
 
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-muted">
               {asset.author ? (
-                <Link
-                  href={`/author/${asset.author.handle}`}
-                  className="flex items-center gap-2 transition hover:text-accent-light"
-                >
-                  <Avatar
-                    src={asset.author.avatar_url}
-                    name={asset.author.username}
-                    size="sm"
-                  />
-                  {asset.author.username}
+                <>
+                  <Link
+                    href={`/author/${asset.author.handle}`}
+                    className="flex items-center gap-2 transition hover:text-accent-light"
+                  >
+                    <Avatar
+                      src={asset.author.avatar_url}
+                      name={asset.author.username}
+                      size="sm"
+                    />
+                    {asset.author.username}
+                    {asset.author.role === "admin" ? (
+                      <AdminBadge size={15} label="Lumo team" />
+                    ) : null}
+                  </Link>
                   {asset.author.role === "admin" ? (
-                    <AdminBadge size={15} label="Lumo team" />
+                    <LinkedProfileBadge size={22} />
                   ) : null}
-                </Link>
+                </>
               ) : null}
               <span>↓ {formatNumber(asset.downloads)} downloads</span>
               <span>Published {formatDate(asset.created_at)}</span>

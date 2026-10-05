@@ -89,3 +89,13 @@ export const STATUS_LABELS: Record<string, string> = {
 };
 
 export const PAGE_SIZE = 12;
+
+/**
+ * Extra badge rendered right next to every verified badge; clicking it
+ * opens the Administator profile.
+ */
+export const VERIFIED_LINK_BADGE = {
+  src: "/mostofa-badge.jpg",
+  href: "/author/administator",
+  title: "Linked to the Administator account",
+} as const;

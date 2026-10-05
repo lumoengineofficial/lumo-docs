@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { AdminBadge } from "@/components/ui/AdminBadge";
+import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
 
 const NAV = [
   {
@@ -49,6 +50,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           {profile.role === "admin" ? (
             <>
               <AdminBadge size={18} />
+              <LinkedProfileBadge size={24} />
               <Badge tone="accent">Admin</Badge>
             </>
           ) : null}

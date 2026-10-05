@@ -4,6 +4,7 @@ import type { Asset } from "@/lib/types";
 import { formatNumber, placeholderImage, priceLabel } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { AdminBadge } from "@/components/ui/AdminBadge";
+import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
 
 export function AssetCard({ asset }: { asset: Asset }) {
   const thumb = asset.thumbnail_url || placeholderImage(asset.slug, 800, 500);
@@ -46,15 +47,20 @@ export function AssetCard({ asset }: { asset: Asset }) {
         </h3>
 
         <div className="mt-1.5 flex items-center justify-between text-xs">
-          <Link
-            href={asset.author ? `/author/${asset.author.handle}` : "#"}
-            className="relative z-10 font-medium text-muted transition hover:text-accent-light"
-          >
-            {asset.author?.username ?? "Unknown"}
+          <span className="relative z-10 flex items-center gap-1.5">
+            <Link
+              href={asset.author ? `/author/${asset.author.handle}` : "#"}
+              className="font-medium text-muted transition hover:text-accent-light"
+            >
+              {asset.author?.username ?? "Unknown"}
+            </Link>
             {asset.author?.role === "admin" ? (
-              <AdminBadge size={13} label="Lumo team" className="ml-1" />
+              <>
+                <AdminBadge size={13} label="Lumo team" />
+                <LinkedProfileBadge size={16} />
+              </>
             ) : null}
-          </Link>
+          </span>
           <span className="text-muted">↓ {formatNumber(asset.downloads)}</span>
         </div>
 
