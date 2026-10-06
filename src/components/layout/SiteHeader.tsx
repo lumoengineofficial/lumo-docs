@@ -8,11 +8,9 @@ import { getBrowserClient, supabaseConfigured } from "@/lib/supabase";
 import type { Profile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/Button";
-import { AdminBadge } from "@/components/ui/AdminBadge";
-import { NewUserBadge } from "@/components/ui/NewUserBadge";
+import { UserBadges } from "@/components/ui/UserBadges";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LumoMark } from "@/components/ui/LumoMark";
-import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
 
 interface SessionUser {
   profile: Profile | null;
@@ -115,7 +113,7 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
         )}
         <span className="flex max-w-[110px] items-center gap-1.5 truncate font-medium text-mist">
           {profile.username || profile.handle}
-          {isAdmin ? <AdminBadge size={15} /> : <NewUserBadge size={15} />}
+          <UserBadges badges={profile.badges} role={profile.role} size={15} />
         </span>
       </button>
 
@@ -125,14 +123,7 @@ function AuthArea({ mobile = false }: { mobile?: boolean }) {
           <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-line bg-panel shadow-card">
             <div className="flex items-center gap-1.5 border-b border-line px-4 py-3">
               <p className="truncate text-sm font-medium text-title">{profile.username}</p>
-              {isAdmin ? (
-                <>
-                  <AdminBadge size={15} />
-                  <LinkedProfileBadge size={20} />
-                </>
-              ) : (
-                <NewUserBadge size={15} />
-              )}
+              <UserBadges badges={profile.badges} role={profile.role} size={15} />
             </div>
             <p className="truncate px-4 pb-3 text-xs text-muted">@{profile.handle}</p>
             <div className="p-1.5">

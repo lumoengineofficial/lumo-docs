@@ -4,9 +4,7 @@ import { getAuthorAssets, getProfileByHandle } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 import { formatDate, formatNumber } from "@/lib/utils";
 import { AssetGrid } from "@/components/assets/AssetGrid";
-import { AdminBadge } from "@/components/ui/AdminBadge";
-import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
-import { NewUserBadge } from "@/components/ui/NewUserBadge";
+import { UserBadges } from "@/components/ui/UserBadges";
 
 export const dynamic = "force-dynamic";
 
@@ -84,14 +82,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
             <h1 className="text-3xl font-bold tracking-tight text-title sm:text-4xl">
               {profile.username}
             </h1>
-            {profile.role === "admin" ? (
-              <>
-                <AdminBadge size={26} label="Lumo team" />
-                <LinkedProfileBadge size={26} />
-              </>
-            ) : (
-              <NewUserBadge size={26} />
-            )}
+            <UserBadges badges={profile.badges} role={profile.role} size={26} />
           </div>
 
           <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">

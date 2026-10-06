@@ -68,6 +68,7 @@ export function publicUser(profile: Profile) {
     avatar: profile.avatar_url ?? null,
     role: profile.role,
     banned: Boolean(profile.banned),
+    badges: profile.badges ?? null,
     createdAt: profile.created_at,
   };
 }

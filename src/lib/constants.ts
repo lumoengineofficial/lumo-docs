@@ -91,11 +91,30 @@ export const STATUS_LABELS: Record<string, string> = {
 export const PAGE_SIZE = 12;
 
 /**
- * Extra badge rendered right next to every verified badge; clicking it
- * opens the Administator profile.
+ * Assignable profile badges. Admins can grant any of these to any account
+ * from /admin/users; the value is stored in `users.badges` (text[]).
  */
-export const ADMIN_LINK_BADGE = {
-  src: "/admin-role-badge.jpg",
-  href: "/author/administator",
-  title: "Lumo admin badge",
+export const BADGES = {
+  verified: { src: "/verified-badge.png", label: "Verified" },
+  admin: { src: "/badge-admin.png", label: "Admin" },
+  partner: { src: "/badge-partner.png", label: "Partner" },
+  new: { src: "/user-badge.jpg", label: "New user", chip: true },
 } as const;
+
+export type BadgeKey = keyof typeof BADGES;
+
+export const BADGE_KEYS = Object.keys(BADGES) as BadgeKey[];
+
+export function isBadgeKey(value: unknown): value is BadgeKey {
+  return typeof value === "string" && Object.prototype.hasOwnProperty.call(BADGES, value);
+}
+
+/** Assigned badges, falling back to role-based defaults before migration 0003. */
+export function badgesFor(entity: {
+  badges?: string[] | null;
+  role?: string | null;
+}): BadgeKey[] {
+  const assigned = (Array.isArray(entity.badges) ? entity.badges : []).filter(isBadgeKey);
+  if (assigned.length > 0) return assigned;
+  return entity.role === "admin" ? ["verified", "admin"] : ["new"];
+}

@@ -12,6 +12,7 @@ export interface Profile {
   avatar_url: string | null;
   role: Role;
   banned: boolean;
+  badges?: string[] | null;
   bio: string | null;
   website: string | null;
   created_at: string;

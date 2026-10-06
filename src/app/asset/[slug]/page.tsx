@@ -11,9 +11,7 @@ import { RatingStars } from "@/components/asset/RatingStars";
 import { Gallery } from "@/components/asset/Gallery";
 import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
-import { AdminBadge } from "@/components/ui/AdminBadge";
-import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
-import { NewUserBadge } from "@/components/ui/NewUserBadge";
+import { UserBadges } from "@/components/ui/UserBadges";
 
 export const dynamic = "force-dynamic";
 
@@ -131,15 +129,12 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                       size="sm"
                     />
                     {asset.author.username}
-                    {asset.author.role === "admin" ? (
-                      <AdminBadge size={15} label="Lumo team" />
-                    ) : (
-                      <NewUserBadge size={15} />
-                    )}
+                    <UserBadges
+                      badges={asset.author.badges}
+                      role={asset.author.role}
+                      size={15}
+                    />
                   </Link>
-                  {asset.author.role === "admin" ? (
-                    <LinkedProfileBadge size={22} />
-                  ) : null}
                 </>
               ) : null}
               <span>↓ {formatNumber(asset.downloads)} downloads</span>
@@ -234,11 +229,11 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                 <span>
                   <span className="flex items-center gap-1.5 text-sm font-semibold text-title">
                     {asset.author.username}
-                    {asset.author.role === "admin" ? (
-                      <AdminBadge size={15} label="Lumo team" />
-                    ) : (
-                      <NewUserBadge size={15} />
-                    )}
+                    <UserBadges
+                      badges={asset.author.badges}
+                      role={asset.author.role}
+                      size={15}
+                    />
                   </span>
                   <span className="block text-xs text-muted">@{asset.author.handle}</span>
                 </span>

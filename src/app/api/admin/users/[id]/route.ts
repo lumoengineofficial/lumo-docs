@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { ApiError, jsonOk, readString, requireAdmin, requireConfigured, withApi } from "@/lib/api";
+import { isBadgeKey } from "@/lib/constants";
 import { getServerClient } from "@/lib/supabase";
 import { publicUser } from "@/lib/serialize";
 import type { Profile } from "@/lib/types";
@@ -11,7 +12,7 @@ interface Ctx {
 }
 
 /**
- * PATCH /api/admin/users/[id]  { role?: "user" | "admin", banned?: boolean }
+ * PATCH /api/admin/users/[id]  { role?, banned?, badges?: string[] }
  * Admin Bearer JWT or X-API-Key required.
  */
 export const PATCH = withApi(async (req: NextRequest, ctx: Ctx) => {
@@ -32,8 +33,22 @@ export const PATCH = withApi(async (req: NextRequest, ctx: Ctx) => {
   }
   if (typeof body.banned === "boolean") patch.banned = body.banned;
 
+  if (body.badges !== undefined) {
+    if (!Array.isArray(body.badges)) {
+      throw new ApiError(400, "invalid_badges", "badges must be an array of badge keys.");
+    }
+    const keys: string[] = [];
+    for (const raw of body.badges) {
+      if (!isBadgeKey(raw)) {
+        throw new ApiError(400, "invalid_badges", `Unknown badge: ${String(raw)}`);
+      }
+      if (!keys.includes(raw)) keys.push(raw);
+    }
+    patch.badges = keys;
+  }
+
   if (Object.keys(patch).length === 0) {
-    throw new ApiError(400, "nothing_to_update", "Provide role and/or banned.");
+    throw new ApiError(400, "nothing_to_update", "Provide role, banned and/or badges.");
   }
 
   // Never let an admin lock themselves out of their own account.

@@ -3,9 +3,7 @@ import Link from "next/link";
 import type { Asset } from "@/lib/types";
 import { formatNumber, placeholderImage, priceLabel } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
-import { AdminBadge } from "@/components/ui/AdminBadge";
-import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
-import { NewUserBadge } from "@/components/ui/NewUserBadge";
+import { UserBadges } from "@/components/ui/UserBadges";
 
 export function AssetCard({ asset }: { asset: Asset }) {
   const thumb = asset.thumbnail_url || placeholderImage(asset.slug, 800, 500);
@@ -55,14 +53,7 @@ export function AssetCard({ asset }: { asset: Asset }) {
             >
               {asset.author?.username ?? "Unknown"}
             </Link>
-            {asset.author?.role === "admin" ? (
-              <>
-                <AdminBadge size={13} label="Lumo team" />
-                <LinkedProfileBadge size={16} />
-              </>
-            ) : (
-              <NewUserBadge size={13} />
-            )}
+            <UserBadges badges={asset.author?.badges} role={asset.author?.role} size={13} />
           </span>
           <span className="text-muted">↓ {formatNumber(asset.downloads)}</span>
         </div>
