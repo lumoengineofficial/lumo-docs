@@ -9,6 +9,7 @@ import {
   withApi,
 } from "@/lib/api";
 import { getAssetByIdOrSlug, updateAsset } from "@/lib/queries";
+import { collaboratorsReady, parseCollaboratorIds, setAssetCollaborators } from "@/lib/collab";
 import { publicAsset } from "@/lib/serialize";
 import { storageAvailable, uploadToBucket } from "@/lib/storage";
 import { parseAssetFields, pickFile } from "@/lib/validate";
@@ -123,10 +124,36 @@ export const PATCH = withApi(async (req: NextRequest, ctx: Ctx) => {
     if (principal.type === "machine" || isOwner || isAdmin) patch.status = requestedStatus;
   }
 
+  const collabPresent =
+    source instanceof FormData
+      ? source.has("collaborator_ids")
+      : "collaborator_ids" in source;
+  let collaboratorIds: string[] | null = null;
+  if (collabPresent) {
+    collaboratorIds = await parseCollaboratorIds(
+      readString(source, "collaborator_ids"),
+      asset.author_id,
+    );
+    if (collaboratorIds.length > 0 && !(await collaboratorsReady())) {
+      throw new ApiError(
+        503,
+        "collaborators_unavailable",
+        "Run supabase/migrations/0004_asset_collaborators.sql in the Supabase SQL editor first.",
+      );
+    }
+  }
+
   if (asset.status === "rejected" && !patch.status) patch.status = "pending";
 
   const updated = await updateAsset(asset.id, patch);
-  return jsonOk({ asset: publicAsset(updated) });
+
+  if (collaboratorIds) {
+    const problem = await setAssetCollaborators(asset.id, collaboratorIds);
+    if (problem) throw new ApiError(503, "collaborators_unavailable", problem);
+  }
+
+  const fresh = (await getAssetByIdOrSlug(asset.id, { anyStatus: true })) ?? updated;
+  return jsonOk({ asset: publicAsset(fresh) });
 });
 
 import { corsOptions } from "@/lib/api";

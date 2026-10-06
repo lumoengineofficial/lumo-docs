@@ -25,14 +25,73 @@ function safeSanitize(q: string): string {
 
 async function hydrateAuthors(items: Asset[]): Promise<Asset[]> {
   if (items.length === 0) return [];
-  const ids = Array.from(new Set(items.map((a) => a.author_id)));
+  const client = getServerClient();
+
+  const collabByAsset = new Map<string, string[]>();
+  try {
+    const { data } = await client
+      .from("asset_collaborators")
+      .select("asset_id, user_id")
+      .in("asset_id", items.map((a) => a.id));
+    for (const row of data ?? []) {
+      const list = collabByAsset.get(row.asset_id) ?? [];
+      list.push(row.user_id);
+      collabByAsset.set(row.asset_id, list);
+    }
+  } catch {
+    // migration 0004 not applied yet - assets simply have no collaborators
+  }
+
+  const ids = Array.from(
+    new Set([...items.map((a) => a.author_id), ...Array.from(collabByAsset.values()).flat()]),
+  );
+  const { data } = await client.from("users").select("*").in("id", ids);
+  const map = new Map<string, Profile>((data ?? []).map((u) => [u.id, u as Profile]));
+
+  return items.map((a) => ({
+    ...a,
+    author: map.get(a.author_id) ?? null,
+    collaborators: (collabByAsset.get(a.id) ?? [])
+      .map((id) => map.get(id))
+      .filter((profile): profile is Profile => Boolean(profile)),
+  }));
+}
+
+/** Owned + co-authored asset ids for a profile (used by author pages). */
+async function ownedAndCollaboratedIds(authorId: string): Promise<string[]> {
+  const client = getServerClient();
+  const { data: owned } = await client
+    .from(ASSET_TABLE)
+    .select("id")
+    .eq("author_id", authorId);
+  const ids = (owned ?? []).map((row) => String(row.id));
+  try {
+    const { data: collab } = await client
+      .from("asset_collaborators")
+      .select("asset_id")
+      .eq("user_id", authorId);
+    for (const row of collab ?? []) {
+      if (!ids.includes(row.asset_id)) ids.push(row.asset_id);
+    }
+  } catch {
+    // migration 0004 not applied yet
+  }
+  return ids;
+}
+
+/** Picker search for the publish form: active accounts matching a name/handle. */
+export async function searchProfiles(q: string, excludeId?: string): Promise<Profile[]> {
+  if (!supabaseConfigured) return [];
+  const term = q.replace(/[,%()'"]/g, " ").replace(/\s+/g, " ").trim().slice(0, 40);
+  if (!term) return [];
   const client = getServerClient();
   const { data } = await client
     .from("users")
     .select("*")
-    .in("id", ids);
-  const map = new Map<string, Profile>((data ?? []).map((u) => [u.id, u as Profile]));
-  return items.map((a) => ({ ...a, author: map.get(a.author_id) ?? null }));
+    .eq("banned", false)
+    .or(`username.ilike.%${term}%,handle.ilike.%${term}%`)
+    .limit(8);
+  return ((data ?? []) as unknown as Profile[]).filter((profile) => profile.id !== excludeId);
 }
 
 /**
@@ -47,13 +106,20 @@ export async function listAssets(filters: AssetFilters = {}): Promise<PagedAsset
   const from = (page - 1) * perPage;
   const sort = filters.sort ?? "newest";
 
+  // Owned + co-authored assets so collaborators show up on shared profiles.
+  let authorAssetIds: string[] | null = null;
+  if (filters.authorId) {
+    authorAssetIds = await ownedAndCollaboratedIds(filters.authorId);
+    if (authorAssetIds.length === 0) return emptyPage(page, perPage);
+  }
+
   const run = async (source: string): Promise<PagedAssets | null> => {
     const client = getServerClient();
     let query = client
       .from(source)
       .select(ASSET_COLUMNS, { count: "exact" });
 
-    if (filters.authorId) query = query.eq("author_id", filters.authorId);
+    if (authorAssetIds) query = query.in("id", authorAssetIds);
     if (filters.featured) query = query.eq("featured", true);
     if (filters.status && filters.status !== "all") {
       query = query.eq("status", filters.status as AssetStatus);

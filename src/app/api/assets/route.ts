@@ -7,7 +7,8 @@ import {
   requireUser,
   withApi,
 } from "@/lib/api";
-import { createAsset, listAssets } from "@/lib/queries";
+import { parseCollaboratorIds, collaboratorsReady, setAssetCollaborators } from "@/lib/collab";
+import { listAssets, createAsset } from "@/lib/queries";
 import { publicAsset } from "@/lib/serialize";
 import { storageAvailable, uploadToBucket } from "@/lib/storage";
 import { placeholderImage, slugify } from "@/lib/utils";
@@ -80,6 +81,8 @@ export const POST = withApi(async (req: NextRequest) => {
   let fileUrl = "";
   let thumbUrl = "";
   let fileSize = 0;
+  let collabRaw = "";
+  let collabPresent = false;
 
   if (isMultipart) {
     const form = await req.formData();
@@ -90,6 +93,8 @@ export const POST = withApi(async (req: NextRequest) => {
     fileUrl = readString(form, "file_url");
     thumbUrl = readString(form, "thumbnail_url");
     fileSize = Number(readString(form, "file_size") || 0);
+    collabRaw = readString(form, "collaborator_ids");
+    collabPresent = form.has("collaborator_ids");
   } else {
     const body = (await req.json().catch(() => null)) as Record<string, unknown> | null;
     if (!body) throw new ApiError(400, "invalid_body", "Expected a JSON or form body.");
@@ -97,7 +102,9 @@ export const POST = withApi(async (req: NextRequest) => {
     fields = parseAssetFields(body);
     fileUrl = String(body.file_url ?? "").trim();
     thumbUrl = String(body.thumbnail_url ?? "").trim();
-    fileSize = Number(body.file_size ?? 0);
+    fileSize = Number(String(body.file_size ?? 0));
+    collabRaw = String(body.collaborator_ids ?? "").trim();
+    collabPresent = "collaborator_ids" in body;
   }
 
   const authorId = principal.type === "user" ? principal.profile.id : null;
@@ -135,6 +142,15 @@ export const POST = withApi(async (req: NextRequest) => {
     );
   }
 
+  const collaboratorIds = collabPresent ? await parseCollaboratorIds(collabRaw, authorId) : [];
+  if (collaboratorIds.length > 0 && !(await collaboratorsReady())) {
+    throw new ApiError(
+      503,
+      "collaborators_unavailable",
+      "Run supabase/migrations/0004_asset_collaborators.sql in the Supabase SQL editor first.",
+    );
+  }
+
   const asset = await createAsset({
     author_id: authorId,
     title: fields.title,
@@ -149,6 +165,11 @@ export const POST = withApi(async (req: NextRequest) => {
     file_size: fileSize,
     status: readString(source, "status") === "draft" ? "draft" : "pending",
   });
+
+  if (collaboratorIds.length > 0) {
+    const problem = await setAssetCollaborators(asset.id, collaboratorIds);
+    if (problem) throw new ApiError(503, "collaborators_unavailable", problem);
+  }
 
   return jsonOk({ asset: publicAsset(asset) }, { status: 201 });
 });

@@ -54,6 +54,14 @@ export function AssetCard({ asset }: { asset: Asset }) {
               {asset.author?.username ?? "Unknown"}
             </Link>
             <UserBadges badges={asset.author?.badges} role={asset.author?.role} size={13} />
+            {(asset.collaborators ?? []).length > 0 ? (
+              <span
+                className="rounded bg-panel2 px-1.5 py-0.5 text-[10px] font-medium text-muted"
+                title={`With ${(asset.collaborators ?? []).map((person) => person.username).join(", ")}`}
+              >
+                +{asset.collaborators!.length}
+              </span>
+            ) : null}
           </span>
           <span className="text-muted">↓ {formatNumber(asset.downloads)}</span>
         </div>

@@ -1,15 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CATEGORIES, LICENSES } from "@/lib/constants";
 import { apiFetch, readApiError } from "@/lib/client-auth";
-import type { Asset } from "@/lib/types";
-import { formatBytes } from "@/lib/utils";
+import type { Asset, Profile } from "@/lib/types";
+import { cn, formatBytes } from "@/lib/utils";
+import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 
 const MAX_ZIP = 50 * 1024 * 1024;
 const MAX_IMAGE = 5 * 1024 * 1024;
+const MAX_COLLABORATORS = 2;
 
 export function PublishForm({ asset }: { asset?: Asset }) {
   const router = useRouter();
@@ -24,10 +26,53 @@ export function PublishForm({ asset }: { asset?: Asset }) {
   const [price, setPrice] = useState(asset && asset.price > 0 ? String(asset.price) : "0");
   const [zip, setZip] = useState<File | null>(null);
   const [thumb, setThumb] = useState<File | null>(null);
+  const [collaborators, setCollaborators] = useState<Profile[]>(asset?.collaborators ?? []);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<Profile[]>([]);
+  const [searching, setSearching] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
   const free = Number(price || 0) === 0;
+  const collaboratorsFull = collaborators.length >= MAX_COLLABORATORS;
+
+  useEffect(() => {
+    const term = query.trim();
+    if (!term) {
+      setResults([]);
+      return;
+    }
+    setSearching(true);
+    const timer = setTimeout(() => {
+      apiFetch(`/api/users/search?q=${encodeURIComponent(term)}`)
+        .then(async (response) => {
+          if (!response.ok) {
+            setResults([]);
+            return;
+          }
+          const body = (await response.json()) as { items?: Profile[] };
+          const taken = new Set(collaborators.map((person) => person.id));
+          setResults((body.items ?? []).filter((person) => !taken.has(person.id)));
+        })
+        .catch(() => setResults([]))
+        .finally(() => setSearching(false));
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [query, collaborators]);
+
+  function addCollaborator(person: Profile) {
+    if (collaboratorsFull) return;
+    setCollaborators((current) =>
+      current.some((item) => item.id === person.id) ? current : [...current, person],
+    );
+    setQuery("");
+    setResults([]);
+  }
+
+  function removeCollaborator(id: string) {
+    setCollaborators((current) => current.filter((person) => person.id !== id));
+  }
+
 
   async function submit(status: "pending" | "draft") {
     setError("");
@@ -60,6 +105,7 @@ export function PublishForm({ asset }: { asset?: Asset }) {
       form.set("version", version.trim() || "1.0.0");
       form.set("price", price.trim() || "0");
       form.set("status", status);
+      form.set("collaborator_ids", collaborators.map((person) => person.id).join(","));
       if (zip) form.set("file", zip);
       if (thumb) form.set("thumbnail", thumb);
 
@@ -112,6 +158,85 @@ export function PublishForm({ asset }: { asset?: Asset }) {
             placeholder="What is inside the pack, poly counts, animation sets, attribution notes…"
             maxLength={5000}
           />
+        </div>
+
+        <div>
+          <span className="label-base">
+            Collaborators{" "}
+            <span className="normal-case text-muted/60">
+              (optional — up to {MAX_COLLABORATORS})
+            </span>
+          </span>
+
+          {collaborators.length > 0 ? (
+            <div className="mb-2 flex flex-wrap gap-2">
+              {collaborators.map((person) => (
+                <span
+                  key={person.id}
+                  className="flex items-center gap-2 rounded-lg border border-accent/40 bg-accent-soft py-1 pl-1.5 pr-2 text-sm text-title"
+                >
+                  <Avatar src={person.avatar_url} name={person.username} size="xs" />
+                  {person.username}
+                  <button
+                    type="button"
+                    onClick={() => removeCollaborator(person.id)}
+                    aria-label={`Remove ${person.username}`}
+                    className="text-muted transition hover:text-title"
+                  >
+                    ✕
+                  </button>
+                </span>
+              ))}
+            </div>
+          ) : null}
+
+          <input
+            id="collaborators"
+            className="input-base"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            disabled={collaboratorsFull}
+            placeholder={
+              collaboratorsFull
+                ? `Up to ${MAX_COLLABORATORS} collaborators added`
+                : "Search people by name or @handle…"
+            }
+            autoComplete="off"
+          />
+
+          {results.length > 0 ? (
+            <ul className="mt-1.5 max-h-52 overflow-y-auto rounded-lg border border-line bg-panel2">
+              {results.map((person) => (
+                <li key={person.id}>
+                  <button
+                    type="button"
+                    onClick={() => addCollaborator(person)}
+                    className="flex w-full items-center gap-3 px-3 py-2 text-left text-sm transition hover:bg-panel"
+                  >
+                    <Avatar src={person.avatar_url} name={person.username} size="xs" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-medium text-title">
+                        {person.username}
+                      </span>
+                      <span className="block truncate text-xs text-muted">@{person.handle}</span>
+                    </span>
+                    <span className="text-xs text-accent-light">Add</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          <p
+            className={cn(
+              "mt-1.5 text-xs text-muted",
+              searching && "animate-pulse text-accent-light"
+            )}
+          >
+            {searching
+              ? "Searching…"
+              : "Co-authored items appear on every contributor's profile (max 3 people per item)."}
+          </p>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">

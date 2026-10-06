@@ -137,6 +137,21 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                   </Link>
                 </>
               ) : null}
+              {(asset.collaborators ?? []).map((person) => (
+                <span key={person.id} className="flex items-center gap-2">
+                  <span className="text-muted/60" aria-hidden="true">
+                    &amp;
+                  </span>
+                  <Link
+                    href={`/author/${person.handle}`}
+                    className="flex items-center gap-2 transition hover:text-accent-light"
+                  >
+                    <Avatar src={person.avatar_url} name={person.username} size="sm" />
+                    {person.username}
+                    <UserBadges badges={person.badges} role={person.role} size={14} />
+                  </Link>
+                </span>
+              ))}
               <span>↓ {formatNumber(asset.downloads)} downloads</span>
               <span>Published {formatDate(asset.created_at)}</span>
             </div>
@@ -247,6 +262,30 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
               >
                 View all assets →
               </Link>
+
+              {(asset.collaborators ?? []).length > 0 ? (
+                <div className="mt-4 space-y-3 border-t border-line pt-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+                    Collaborators
+                  </p>
+                  {(asset.collaborators ?? []).map((person) => (
+                    <Link
+                      key={person.id}
+                      href={`/author/${person.handle}`}
+                      className="flex items-center gap-3 transition hover:text-accent-light"
+                    >
+                      <Avatar src={person.avatar_url} name={person.username} size="sm" />
+                      <span className="min-w-0">
+                        <span className="flex items-center gap-1.5 text-sm font-medium text-title">
+                          {person.username}
+                          <UserBadges badges={person.badges} role={person.role} size={14} />
+                        </span>
+                        <span className="block text-xs text-muted">@{person.handle}</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ) : null}
         </aside>

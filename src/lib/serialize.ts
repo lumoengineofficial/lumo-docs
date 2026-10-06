@@ -13,6 +13,12 @@ export interface PublicAsset {
     handle: string;
     avatar: string | null;
   } | null;
+  collaborators: {
+    id: string;
+    username: string;
+    handle: string;
+    avatar: string | null;
+  }[];
   category: string;
   tags: string[];
   price: number;
@@ -43,6 +49,12 @@ export function publicAsset(asset: Asset): PublicAsset {
           avatar: author.avatar_url ?? null,
         }
       : null,
+    collaborators: (asset.collaborators ?? []).map((person) => ({
+      id: person.id,
+      username: person.username,
+      handle: person.handle,
+      avatar: person.avatar_url ?? null,
+    })),
     category: asset.category,
     tags: Array.isArray(asset.tags) ? asset.tags : [],
     price: Number(asset.price ?? 0),

@@ -40,6 +40,7 @@ export interface Asset {
   rating?: number;
   rating_count?: number;
   author?: Profile | null;
+  collaborators?: Profile[] | null;
 }
 
 export interface AssetFilters {
