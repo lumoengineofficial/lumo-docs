@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { AdminBadge } from "@/components/ui/AdminBadge";
 import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
+import { NewUserBadge } from "@/components/ui/NewUserBadge";
 
 const NAV = [
   {
@@ -53,7 +54,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
               <LinkedProfileBadge size={24} />
               <Badge tone="accent">Admin</Badge>
             </>
-          ) : null}
+          ) : (
+            <NewUserBadge size={18} />
+          )}
           <Link
             href={`/author/${profile.handle}`}
             className="rounded-lg border border-line bg-panel px-3.5 py-2 text-sm text-mist transition hover:border-accent/50 hover:text-title"

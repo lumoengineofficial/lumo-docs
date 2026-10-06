@@ -6,6 +6,7 @@ import { formatDate, formatNumber } from "@/lib/utils";
 import { AssetGrid } from "@/components/assets/AssetGrid";
 import { AdminBadge } from "@/components/ui/AdminBadge";
 import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
+import { NewUserBadge } from "@/components/ui/NewUserBadge";
 
 export const dynamic = "force-dynamic";
 
@@ -88,7 +89,9 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
                 <AdminBadge size={26} label="Lumo team" />
                 <LinkedProfileBadge size={26} />
               </>
-            ) : null}
+            ) : (
+              <NewUserBadge size={26} />
+            )}
           </div>
 
           <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">

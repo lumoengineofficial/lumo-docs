@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
 import { AdminBadge } from "@/components/ui/AdminBadge";
 import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
+import { NewUserBadge } from "@/components/ui/NewUserBadge";
 
 export const dynamic = "force-dynamic";
 
@@ -132,7 +133,9 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                     {asset.author.username}
                     {asset.author.role === "admin" ? (
                       <AdminBadge size={15} label="Lumo team" />
-                    ) : null}
+                    ) : (
+                      <NewUserBadge size={15} />
+                    )}
                   </Link>
                   {asset.author.role === "admin" ? (
                     <LinkedProfileBadge size={22} />
@@ -233,7 +236,9 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                     {asset.author.username}
                     {asset.author.role === "admin" ? (
                       <AdminBadge size={15} label="Lumo team" />
-                    ) : null}
+                    ) : (
+                      <NewUserBadge size={15} />
+                    )}
                   </span>
                   <span className="block text-xs text-muted">@{asset.author.handle}</span>
                 </span>

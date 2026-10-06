@@ -5,6 +5,7 @@ import { formatNumber, placeholderImage, priceLabel } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { AdminBadge } from "@/components/ui/AdminBadge";
 import { LinkedProfileBadge } from "@/components/ui/LinkedProfileBadge";
+import { NewUserBadge } from "@/components/ui/NewUserBadge";
 
 export function AssetCard({ asset }: { asset: Asset }) {
   const thumb = asset.thumbnail_url || placeholderImage(asset.slug, 800, 500);
@@ -59,7 +60,9 @@ export function AssetCard({ asset }: { asset: Asset }) {
                 <AdminBadge size={13} label="Lumo team" />
                 <LinkedProfileBadge size={16} />
               </>
-            ) : null}
+            ) : (
+              <NewUserBadge size={13} />
+            )}
           </span>
           <span className="text-muted">↓ {formatNumber(asset.downloads)}</span>
         </div>
