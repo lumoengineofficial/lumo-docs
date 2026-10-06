@@ -85,8 +85,8 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
             </h1>
             {profile.role === "admin" ? (
               <>
-                <AdminBadge size={24} label="Lumo team" />
-                <LinkedProfileBadge size={34} />
+                <AdminBadge size={26} label="Lumo team" />
+                <LinkedProfileBadge size={26} />
               </>
             ) : null}
           </div>

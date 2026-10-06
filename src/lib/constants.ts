@@ -94,8 +94,8 @@ export const PAGE_SIZE = 12;
  * Extra badge rendered right next to every verified badge; clicking it
  * opens the Administator profile.
  */
-export const VERIFIED_LINK_BADGE = {
-  src: "/mostofa-badge.jpg",
+export const ADMIN_LINK_BADGE = {
+  src: "/admin-role-badge.jpg",
   href: "/author/administator",
-  title: "Linked to the Administator account",
+  title: "Lumo admin badge",
 } as const;
