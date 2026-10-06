@@ -399,3 +399,52 @@ export async function bumpDownloads(id: string): Promise<void> {
     }
   }
 }
+
+export interface RatingSummary {
+  rating: number;
+  rating_count: number;
+}
+
+/** Aggregated rating from the assets_public view (falls back to raw rows). */
+export async function getRatingSummary(assetId: string): Promise<RatingSummary> {
+  if (!supabaseConfigured) return { rating: 0, rating_count: 0 };
+  const client = getServerClient();
+  const { data, error } = await client
+    .from(ASSET_VIEW)
+    .select("rating, rating_count")
+    .eq("id", assetId)
+    .maybeSingle();
+  if (!error && data) {
+    return { rating: Number(data.rating ?? 0), rating_count: Number(data.rating_count ?? 0) };
+  }
+  const { data: rows, error: rowsError } = await client
+    .from("ratings")
+    .select("stars")
+    .eq("asset_id", assetId);
+  if (rowsError || !rows || rows.length === 0) return { rating: 0, rating_count: 0 };
+  const total = rows.reduce((sum, row) => sum + Number(row.stars ?? 0), 0);
+  return { rating: Math.round((total / rows.length) * 10) / 10, rating_count: rows.length };
+}
+
+/** The stars a given user gave an asset, or null when they have not rated. */
+export async function getUserRating(assetId: string, userId: string): Promise<number | null> {
+  if (!supabaseConfigured) return null;
+  const client = getServerClient();
+  const { data } = await client
+    .from("ratings")
+    .select("stars")
+    .eq("asset_id", assetId)
+    .eq("user_id", userId)
+    .maybeSingle();
+  return data ? Number(data.stars) : null;
+}
+
+/** Inserts or replaces the user's rating (one row per user + asset). */
+export async function setUserRating(assetId: string, userId: string, stars: number): Promise<void> {
+  if (!supabaseConfigured) return;
+  const client = getServerClient();
+  const { error } = await client
+    .from("ratings")
+    .upsert({ asset_id: assetId, user_id: userId, stars }, { onConflict: "asset_id,user_id" });
+  if (error) throw new Error(error.message);
+}

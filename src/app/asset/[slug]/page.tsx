@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAssetBySlug, getRelatedAssets } from "@/lib/queries";
+import { getAssetBySlug, getRatingSummary, getRelatedAssets } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 import type { Asset } from "@/lib/types";
 import { formatBytes, formatDate, formatNumber, placeholderImage, priceLabel } from "@/lib/utils";
 import { AssetGrid } from "@/components/assets/AssetGrid";
 import { DownloadButton } from "@/components/asset/DownloadButton";
+import { RatingStars } from "@/components/asset/RatingStars";
 import { Gallery } from "@/components/asset/Gallery";
 import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
@@ -66,6 +67,7 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
   if (!asset) notFound();
 
   const related = await getRelatedAssets(asset);
+  const summary = await getRatingSummary(asset.id);
   const free = Number(asset.price ?? 0) === 0;
 
   const specs: [string, string][] = [
@@ -74,6 +76,12 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
     ["License", asset.license],
     ["Category", asset.category],
     ["Downloads", formatNumber(asset.downloads)],
+    [
+      "Rating",
+      summary.rating_count > 0
+        ? `${summary.rating.toFixed(1)} / 5 (${summary.rating_count})`
+        : "No ratings yet",
+    ],
     ["Updated", formatDate(asset.created_at)],
   ];
 
@@ -194,6 +202,16 @@ export default async function AssetDetailPage({ params }: AssetPageProps) {
                 </div>
               ))}
             </dl>
+          </div>
+
+          <div className="mt-4">
+            <RatingStars
+              assetId={asset.id}
+              assetSlug={asset.slug}
+              authorId={asset.author_id}
+              rating={summary.rating}
+              ratingCount={summary.rating_count}
+            />
           </div>
 
           {asset.author ? (
