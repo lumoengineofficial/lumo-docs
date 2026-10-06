@@ -3,7 +3,7 @@ import { SITE } from "@/lib/constants";
 import { loadDocs } from "@/lib/markdown";
 import { listAssets } from "@/lib/queries";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 const base = SITE.url.replace(/\/$/, "");
 
